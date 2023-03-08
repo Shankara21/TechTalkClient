@@ -1,0 +1,61 @@
+<div class="p-2 md:pt-[50px] mx-auto">
+  <!-- make title -->
+  <div class="flex items-center justify-between my-5">
+    <h1 class="text-4xl font-bold text-gray-700 dark:text-gray-200">Article</h1>
+    <a
+      routerLink="/articlesCreate"
+      class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
+    >
+      Add new
+    </a>
+  </div>
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <thead
+        class="text-xs text-gray-700 uppercase bg-gray-100 border-b border-gray-400"
+      >
+        <tr>
+          <th scope="col" class="px-6 py-3">#</th>
+          <th scope="col" class="px-6 py-3">Creator</th>
+          <th scope="col" class="px-6 py-3">Category</th>
+          <th scope="col" class="px-6 py-3">Title</th>
+          <th scope="col" class="px-6 py-3">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          class="bg-gray-100 border-b text-center"
+          *ngIf="!articles.length ; else show"
+        >
+          <td class="px-6 py-4 text-gray-900" colspan="5">Belum ada data.</td>
+        </tr>
+        <ng-template #show>
+          <tr class="bg-gray-100 border-b" *ngFor="let item of articles">
+            <th
+              scope="row"
+              class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+            >
+              {{ item.index }}
+            </th>
+            <td class="px-6 py-4 text-gray-900">{{ item.User.username }}</td>
+            <td class="px-6 py-4 text-gray-900">{{ item.Category.name }}</td>
+            <td class="px-6 py-4 text-gray-900">{{ item.title }}</td>
+            <td class="px-6 py-4">
+              <a
+                routerLink="/articles/{{ item.id }}"
+                class="text-white bg-[#FFBF00] hover:bg-[#F49D1A] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mr-2"
+                >Edit</a
+              >
+              <button
+                (click)="deleteArticle(item.id)"
+                class="text-white bg-[#DC0000] hover:bg-[#CD0404] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        </ng-template>
+      </tbody>
+    </table>
+  </div>
+</div>
