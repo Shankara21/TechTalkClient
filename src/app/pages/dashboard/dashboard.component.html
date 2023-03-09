@@ -10,29 +10,36 @@
     <div class="grid grid-cols-1 gap-8 mt-8 md:grid-cols-2">
       <!-- Call from API -->
 
-      <div class="rounded-lg lg:flex hover:bg-gray-200" *ngFor="let item of articles">
-        <a routerLink="/detailArticle/{{ item.title }}">
-          <img
-            class="object-cover w-full h-56 rounded-lg lg:w-64"
-            src="http://localhost:3000/{{ item.cover }}"
-            alt=""
-          />
-        </a>
-        <div class="flex flex-col justify-between py-6 lg:mx-6">
-          <a
-            routerLink="/detailArticle/{{ item.title }}"
-            class="text-xl font-semibold text-gray-800 hover:underline"
-          >
-            {{ item.title }}
+      <div *ngIf="articles.length; else show">
+        <div
+          class="rounded-lg lg:flex hover:bg-gray-200"
+          *ngFor="let item of articles"
+        >
+          <a routerLink="/detailArticle/{{ item.title }}">
+            <img
+              class="object-cover w-full h-56 rounded-lg lg:w-64"
+              src="http://localhost:3000/{{ item.cover }}"
+              alt=""
+            />
           </a>
-          <div>
-            <p class="text-sm text-gray-500">By : {{ item.User.username }}</p>
-            <span class="text-sm text-gray-500"
-              >On: {{ item.createdAt | date : "d MMMM yyy" }}</span
+          <div class="flex flex-col justify-between py-6 lg:mx-6">
+            <a
+              routerLink="/detailArticle/{{ item.title }}"
+              class="text-xl font-semibold text-gray-800 hover:underline"
             >
+              {{ item.title }}
+            </a>
+            <div>
+              <p class="text-sm text-gray-500">By : {{ item.User.username }}</p>
+              <span class="text-sm text-gray-500"
+                >On: {{ item.createdAt | date : "d MMMM yyy" }}</span
+              >
+            </div>
           </div>
         </div>
       </div>
+
+     
       <ng-template #show>
         <div
           class="flex items-center justify-center p-6 rounded-lg w-[78vw] h-[75vh]"
