@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { DetailArticleComponent } from './pages/detail-article/detail-article.component';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     IndexCategoryComponent,
     CreateCategoryComponent,
     EditCategoryComponent,
+    DetailArticleComponent,
 
   ],
   imports: [

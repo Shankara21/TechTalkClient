@@ -13,22 +13,50 @@ import jwt_decode from 'jwt-decode';
 export class IndexCategoryComponent implements OnInit {
 
   constructor(public ControlService: ControlService, private router: Router, private cookieService: CookieService) { }
+  // pagination
+  p: number = 1;
+  itemsPerPage: number = 10;
+  totalProduct: any;
+  // search
+  term: any;
 
-  categories:any[] = [];
+  // auth
+  decoded: any;
+  refreshToken: any;
+
+  categories: any[] = [];
 
   ngOnInit(): void {
 
+    const token = this.cookieService.get('techTalkToken');
 
-    this.ControlService.getCategories().subscribe((data: any) => { 
+    if (!token) {
+      this.router.navigate(['/login']);
+    }
+    this.refreshToken = new FormGroup({
+      refreshToken: new FormControl(token)
+    })
+    this.ControlService.refreshToken(this.refreshToken.value).subscribe((res: any) => {
+      this.decoded = jwt_decode(res.accessToken);
+      this.ControlService.data = {
+        username: this.decoded.username,
+        email: this.decoded.email,
+        fullname: this.decoded.fullname,
+        userLevel: this.decoded.userLevel,
+        id: this.decoded.id
+      }
+    });
+
+    this.ControlService.getCategories().subscribe((data: any) => {
       this.categories = data;
       this.categories.map((item: any) => {
         item.index = this.categories.indexOf(item) + 1;
       })
     })
   }
-  deleteCategory(id: any) { 
+  deleteCategory(id: any) {
     this.ControlService.deleteCategory(id).subscribe((data: any) => {
-      this.ControlService.getCategories().subscribe((data: any) => { 
+      this.ControlService.getCategories().subscribe((data: any) => {
         this.categories = data;
         this.categories.map((item: any) => {
           item.index = this.categories.indexOf(item) + 1;

@@ -1,25 +1,29 @@
-import { ControlService } from './../../Service/control.service';
-import { Component, OnInit } from '@angular/core';
+import { ControlService } from 'src/app/Service/control.service';
+import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
-import jwt_decode from 'jwt-decode';
-import { CookieService } from "ngx-cookie-service";
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import jwt_decode from 'jwt-decode';
+import * as moment from 'moment';
+
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  selector: 'app-detail-article',
+  templateUrl: './detail-article.component.html',
+  styleUrls: ['./detail-article.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DetailArticleComponent implements OnInit {
 
   constructor(public ControlService: ControlService, private router: Router, private cookieService: CookieService) { }
 
-  articles: any[] = [];
+  article: any;
+  id: any;
+  msg: any;
+  diffTime: any;
 
   // auth
   decoded: any;
   refreshToken: any;
-
 
   ngOnInit(): void {
     const token = this.cookieService.get('techTalkToken');
@@ -41,9 +45,14 @@ export class DashboardComponent implements OnInit {
       }
     });
 
-
-    this.ControlService.getArticles().subscribe((data: any) => {
-      this.articles = data;
+    this.id = this.router.url.split('/')[2];
+    this.ControlService.showArticles(this.id).subscribe((data: any) => {
+      this.article = data;
+      // membuat waktu yang sudah berlalu
+      setTimeout(() => {
+        this.diffTime = moment(this.article.createdAt).fromNow();
+      }, 1000);
+      console.log(this.diffTime);
     })
   }
 

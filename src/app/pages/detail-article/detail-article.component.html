@@ -1,0 +1,28 @@
+<div class="p-3 md:pt-[20px] mx-auto">
+  <!-- make title -->
+  <div class="flex items-center justify-between mt-5">
+    <h1 class="text-4xl font-bold text-gray-700 dark:text-gray-200">
+      {{ article.title }}
+    </h1>
+  </div>
+  <p class="mt-2 text-sm text-gray-500">Published : {{ diffTime }}</p>
+  <div class="relative p-6 overflow-x-auto shadow-2xl bg-gray-50 sm:rounded-lg">
+    <div class="flex justify-center">
+      <img
+        class="h-auto max-w-md mb-5 rounded-xl"
+        src="http://localhost:3000/{{ article.infografis }}"
+      />
+    </div>
+
+    <p class="mb-3 font-light text-gray-500 dark:text-gray-400">
+      {{ article.desc }}
+    </p>
+    <div class="flex items-center justify-between mt-5">
+      <h1 class="text-xl font-bold text-gray-700 dark:text-gray-200">
+        Publisher : {{ article.User.username }}
+      </h1>
+    </div>
+  </div>
+
+  <!-- creator by -->
+</div>

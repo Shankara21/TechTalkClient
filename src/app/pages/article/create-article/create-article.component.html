@@ -47,28 +47,98 @@
   <!-- make title -->
   <div class="flex items-center justify-between my-5">
     <h1 class="text-4xl font-bold text-gray-700 dark:text-gray-200">
-      Create new Category
+      Create new Article
     </h1>
   </div>
 
   <div
     class="block w-full p-6 bg-white border border-gray-200 rounded-lg shadow-xl"
   >
-    <form [formGroup]="form" (submit)="submit()">
+    <form [formGroup]="form" (submit)="submit()" enctype="multipart/form-data">
       <div class="flex flex-col mb-4">
         <label
           class="mb-2 text-sm font-bold tracking-tight text-gray-700 dark:text-white"
           for="name"
-          >Name</label
+          >Title Article</label
         >
         <input
-          class="px-4 py-2 text-gray-700 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-gray-500 w-full md:w-1/2"
+          class="w-full px-4 py-2 text-gray-800 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:border-gray-500 sm:w-1/2 md:3/4"
           id="name"
           type="text"
-          placeholder="Name"
-          formControlName="name"
+          placeholder="Title Article"
+          formControlName="title"
         />
       </div>
+      <div class="flex flex-col mb-4">
+        <label
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          for="file_input"
+          >Cover</label
+        >
+         <img
+          class="h-auto max-w-md {{ coverSrc && 'mb-3' }} rounded-xl"
+          src="{{ coverSrc }}"
+        />
+        <input
+          class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none sm:w-1/2 md:3/4"
+          id="file_input"
+          type="file"
+          formControlName="cover"
+          (change)="processCover($event)"
+        />
+      </div>
+      <div class="flex flex-col mb-4">
+        <label
+          class="mb-2 text-sm font-bold tracking-tight text-gray-700 dark:text-white"
+          for="name"
+          >Category</label
+        >
+        <select
+          id="countries"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 sm:w-1/2 md:3/4"
+          formControlName="categoryId"
+        >
+          <option value="{{ item.id }}" *ngFor="let item of categories">
+            {{ item.name }}
+          </option>
+        </select>
+      </div>
+      <div class="flex flex-col mb-4">
+        <label
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          for="infografis"
+          >Infografis</label
+        >
+
+        <img
+          class="h-auto max-w-md {{ infografisSrc && 'mb-3' }} rounded-xl"
+          src="{{ infografisSrc }}"
+        />
+
+        <input
+          class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none sm:w-1/2 md:3/4"
+          id="infografis"
+          type="file"
+          formControlName="infografis"
+          (change)="processInfografis($event)"
+        />
+      </div>
+
+      <div class="flex flex-col mb-4">
+        <label
+          for="message"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >Description</label
+        >
+        <textarea
+          id="message"
+          rows="6"
+          class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-gray-700 focus:border-gray-700 md:w-3/4"
+          placeholder="Write your thoughts here..."
+          formControlName="desc"
+        ></textarea>
+      </div>
+
       <!-- button submit reset -->
       <div class="flex mb-4">
         <button

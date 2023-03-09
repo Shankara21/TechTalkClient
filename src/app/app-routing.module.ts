@@ -1,3 +1,4 @@
+import { DetailArticleComponent } from './pages/detail-article/detail-article.component';
 import { EditArticleComponent } from './pages/article/edit-article/edit-article.component';
 import { EditCategoryComponent } from './pages/category/edit-category/edit-category.component';
 import { CreateCategoryComponent } from './pages/category/create-category/create-category.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'articles', component: IndexArticleComponent },
   { path: 'articlesCreate', component: CreateArticleComponent },
   { path: 'articles/:id', component: EditArticleComponent },
+  { path: 'detailArticle/:id', component: DetailArticleComponent },
   { path: 'categories', component: IndexCategoryComponent },
   { path: 'categoriesCreate', component: CreateCategoryComponent },
   { path: 'categories/:id', component: EditCategoryComponent },

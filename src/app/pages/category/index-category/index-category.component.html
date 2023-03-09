@@ -11,10 +11,10 @@
       Add new
     </a>
   </div>
-  <div class="relative overflow-x-auto sm:rounded-lg shadow-2xl">
+  <div class="relative overflow-x-auto bg-gray-100 shadow-2xl sm:rounded-lg">
     <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400">
       <thead
-        class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400 border-b border-gray-400"
+        class="text-xs text-gray-700 uppercase bg-gray-100 border-b border-gray-400 dark:bg-gray-700 dark:text-gray-400"
       >
         <tr>
           <th scope="col" class="px-6 py-3">#</th>
@@ -27,7 +27,14 @@
           <td class="px-6 py-4 text-center" colspan="3">Belum ada data.</td>
         </tr>
         <ng-template #show>
-          <tr class="bg-gray-100 border-b" *ngFor="let item of categories">
+          <tr
+            class="bg-gray-100 border-b"
+            *ngFor="
+              let item of categories
+                | filter : term
+                | paginate : { itemsPerPage: itemsPerPage, currentPage: p }
+            "
+          >
             <th
               scope="row"
               class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
@@ -52,5 +59,8 @@
         </ng-template>
       </tbody>
     </table>
+    <div *ngIf="categories.length >= 10" class="m-3 text-center">
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
   </div>
 </div>

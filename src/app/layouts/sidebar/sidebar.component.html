@@ -1,4 +1,4 @@
-<div class="h-screen fixed flex items-center max-md:hidden">
+<div class="fixed flex items-center h-screen max-md:hidden">
   <div
     class="h-fit p-3 space-y-2 w-60 bg-[#0A2647] text-gray-100 rounded-3xl ml-3 z-40"
   >
@@ -13,7 +13,9 @@
         <span class="flex items-center space-x-1"> </span>
       </div>
     </div>
-    <p class="text-center text-gray-400">Welcome, <span class="text-lg text-white">Muhammad Lazuardi Timur.</span></p>
+    <p class="text-center text-gray-400">
+      Welcome, <span class="text-lg text-white">{{ControlService.data.fullname}}.</span>
+    </p>
     <div class="divide-y divide-gray-700">
       <ul class="pt-4 pb-2 space-y-1 text-sm">
         <li class="hover:bg-[#144272] rounded-xl">
@@ -21,7 +23,7 @@
             rel="noopener noreferrer"
             routerLink="/dashboard"
             routerLinkActive="active"
-            class="flex items-center p-2 space-x-3 rounded-md"
+            class="flex items-center p-2 space-x-3 rounded-md {{ router.url.includes('detailArticle') ? 'active' : '' }}"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -91,7 +93,7 @@
             rel="noopener noreferrer"
             routerLink="/articles"
             routerLinkActive="active"
-            class="flex items-center p-2 space-x-3 rounded-md "
+            class="flex items-center p-2 space-x-3 rounded-md"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -114,7 +116,9 @@
             rel="noopener noreferrer"
             routerLink="/categories"
             routerLinkActive="active"
-            class="flex items-center p-2 space-x-3 rounded-md {{ router.url.includes('categories') ? 'active' : '' }}"
+            class="flex items-center p-2 space-x-3 rounded-md {{
+              router.url.includes('categories') ? 'active' : ''
+            }}"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -131,15 +135,13 @@
             <span>Category</span>
           </a>
         </li>
-        
       </ul>
       <ul class="pt-4 pb-2 space-y-1 text-sm">
-        
         <li class="hover:bg-[#144272] rounded-xl">
           <a
             rel="noopener noreferrer"
-            href="#"
-            class="flex items-center p-2 space-x-3 rounded-md"
+            class="flex items-center p-2 space-x-3 rounded-md cursor-pointer"
+            (click)="logout()"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -155,6 +157,88 @@
           </a>
         </li>
       </ul>
+    </div>
+  </div>
+</div>
+<div class="px-3 py-3 md:hidden">
+  <div
+    class="flex items-center justify-between bg-[#0A2647] rounded-2xl py-2 px-2"
+  >
+    <div class="flex items-center justify-start">
+      <button
+        (click)="showDropdwon = !showDropdwon"
+        class="text-white bg-transparent hover:bg-[#144272] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
+        type="button"
+      >
+        <svg
+          class="w-6 h-6"
+          aria-hidden="true"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            clip-rule="evenodd"
+            fill-rule="evenodd"
+            d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
+          ></path>
+        </svg>
+      </button>
+      <!-- Dropdown menu -->
+      <div
+        id="dropdown"
+        class="z-10 {{
+          showDropdwon ? 'block' : 'hidden'
+        }}  bg-[#0A2647] divide-y divide-gray-100 rounded-lg shadow w-44"
+        data-popper-placement="bottom"
+        style="
+          position: absolute;
+          inset: 0px auto auto 0px;
+          margin: 0px;
+          transform: translate3d(10px, 74px, 0px);
+        "
+      >
+        <ul
+          class="py-2 text-sm text-gray-100"
+          aria-labelledby="dropdownDefaultButton"
+        >
+          <li>
+            <a
+              routerLink="/dashboard"
+              routerLinkActive="active"
+              class="block px-4 py-2 hover:bg-[#144272] mx-2 hover:rounded-xl my-1"
+              >Main</a
+            >
+          </li>
+          <li>
+            <a
+              routerLink="/articles"
+              routerLinkActive="active"
+              class="block px-4 py-2 hover:bg-[#144272] mx-2 hover:rounded-xl my-1"
+              >Post</a
+            >
+          </li>
+          <li>
+            <a
+              routerLink="/categories"
+              routerLinkActive="active"
+              class="block px-4 py-2 hover:bg-[#144272] mx-2 hover:rounded-xl my-1"
+              >Category</a
+            >
+          </li>
+          <li>
+            <a (click)="logout()" class="block px-4 py-2 hover:bg-[#144272] mx-2 hover:rounded-xl my-1">Logout</a>
+          </li>
+        </ul>
+      </div>
+
+      <a routerLink="/dashboard" class="flex ml-2 md:mr-24">
+        <img src="assets/brainstorm.png" class="h-8 mr-3" />
+        <span
+          class="self-center text-xl font-semibold text-white sm:text-2xl whitespace-nowrap"
+          >TechTalk</span
+        >
+      </a>
     </div>
   </div>
 </div>

@@ -18,7 +18,31 @@ export class CreateCategoryComponent implements OnInit {
   form!: FormGroup;
   errorMsg: any;
 
+  // auth
+  decoded: any;
+  refreshToken: any;
+  id: any
+
+
   ngOnInit(): void {
+    const token = this.cookieService.get('techTalkToken');
+
+    if (!token) {
+      this.router.navigate(['/login']);
+    }
+    this.refreshToken = new FormGroup({
+      refreshToken: new FormControl(token)
+    })
+    this.controlService.refreshToken(this.refreshToken.value).subscribe((res: any) => {
+      this.decoded = jwt_decode(res.accessToken);
+      this.controlService.data = {
+        username: this.decoded.username,
+        email: this.decoded.email,
+        fullname: this.decoded.fullname,
+        userLevel: this.decoded.userLevel,
+        id: this.decoded.id
+      }
+    });
     this.form = new FormGroup({
       name: new FormControl('', [Validators.required]),
     });
@@ -31,7 +55,7 @@ export class CreateCategoryComponent implements OnInit {
       }, 2000);
       return;
     }
-    this.controlService.createCategory(this.form.value).subscribe((data: any) => { 
+    this.controlService.createCategory(this.form.value).subscribe((data: any) => {
       this.router.navigate(['/categories']);
     })
   }
