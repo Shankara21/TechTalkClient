@@ -15,10 +15,13 @@ export class DashboardComponent implements OnInit {
   constructor(public ControlService: ControlService, private router: Router, private cookieService: CookieService) { }
 
   articles: any[] = [];
+  categories:any[] = [];
 
   // auth
   decoded: any;
   refreshToken: any;
+
+  category!: FormGroup;
 
 
   ngOnInit(): void {
@@ -42,6 +45,23 @@ export class DashboardComponent implements OnInit {
     });
 
 
+    this.ControlService.getCategories().subscribe((data: any) => {
+      this.categories = data;
+    })
+    this.ControlService.getArticles().subscribe((data: any) => {
+      this.articles = data;
+    })
+
+    this.category = new FormGroup({
+      name: new FormControl('', [Validators.required]),
+    })
+  }
+  filterCategory() {
+    this.ControlService.filterCategory(this.category.value.name).subscribe((data: any) => {
+      this.articles = data;
+    })
+  }
+  refresh() {
     this.ControlService.getArticles().subscribe((data: any) => {
       this.articles = data;
     })
