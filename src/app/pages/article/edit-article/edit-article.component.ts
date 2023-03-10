@@ -58,8 +58,8 @@ export class EditArticleComponent {
       this.title = data.title;
       this.desc = data.desc;
       this.categoryId = data.categoryId;
-      this.coverSrc = `http://localhost:3000/${data.cover}`;
-      this.infografisSrc = `http://localhost:3000/${data.infografis}`;
+      this.coverSrc = `http://192.168.9.47:3125/${data.cover}`;
+      this.infografisSrc = `http://192.168.9.47:3125/${data.infografis}`;
       this.id = data.id;
     })
 
