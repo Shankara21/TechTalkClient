@@ -52,7 +52,6 @@ export class DetailArticleComponent implements OnInit {
       setTimeout(() => {
         this.diffTime = moment(this.article.createdAt).fromNow();
       }, 1000);
-      console.log(this.diffTime);
     })
   }
 

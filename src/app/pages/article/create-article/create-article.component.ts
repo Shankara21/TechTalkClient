@@ -28,6 +28,8 @@ export class CreateArticleComponent implements OnInit {
   decoded: any;
   refreshToken: any;
 
+  isDisabled = false
+
   ngOnInit(): void {
     const token = this.cookieService.get('techTalkToken');
 
@@ -102,6 +104,8 @@ export class CreateArticleComponent implements OnInit {
   }
 
   submit() {
+
+
     if (this.form.invalid) {
       this.errorMsg = 'Please fill all the fields';
       setTimeout(() => {
@@ -109,8 +113,16 @@ export class CreateArticleComponent implements OnInit {
       }, 2000);
       return;
     }
+
+    this.isDisabled = true;
+    setTimeout(() => {
+      this.isDisabled = false;
+    }, 5000);
     this.form.value.categoryId = Number(this.form.value.categoryId);
     this.form.value.userId = Number(this.form.value.userId);
+
+
+
 
     const formData = new FormData();
     formData.append('title', this.form.value.title);
@@ -118,7 +130,9 @@ export class CreateArticleComponent implements OnInit {
     formData.append('categoryId', this.form.value.categoryId);
     formData.append('desc', this.form.value.desc);
     formData.append('cover', this.cover, this.cover.name);
+
     formData.append('infografis', this.infografis, this.infografis.name);
+
 
     this.controlService.createArticle(formData).subscribe((data: any) => {
       this.router.navigate(['/articles']);

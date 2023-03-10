@@ -55,6 +55,7 @@ export class EditArticleComponent {
     });
 
     this.controlService.showArticles(this.params).subscribe((data: any) => {
+
       this.title = data.title;
       this.desc = data.desc;
       this.categoryId = data.categoryId;
