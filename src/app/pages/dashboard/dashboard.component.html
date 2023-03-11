@@ -38,40 +38,49 @@
 
       <div
         class="rounded-lg lg:flex hover:bg-gray-200"
-        *ngFor="let item of articles"
+        *ngFor="
+          let item of articles
+            | filter : term
+            | paginate : { itemsPerPage: itemsPerPage, currentPage: p }
+        "
       >
         <a routerLink="/detailArticle/{{ item.title }}">
-          <img
+          <!-- <img
             class="object-cover w-full h-56 rounded-lg lg:w-64"
             src="http://192.168.9.47:3125/{{ item.cover }}"
+            alt=""
+          /> -->
+          <img
+            class="object-cover w-full h-56 rounded-lg lg:w-64"
+            src="http://localhost:3000/{{ item.cover }}"
             alt=""
           />
         </a>
         <!-- <a routerLink="/detailArticle/{{ item.title }}"> -->
-          <div class="flex flex-col justify-between py-6 lg:mx-6">
-            <div>
-              <a
-                routerLink="/detailArticle/{{ item.title }}"
-                class="text-xl font-semibold text-gray-800 hover:underline"
-              >
-                {{ item.title }}
-              </a>
-              <p class="text-sm text-[#3A98B9]">
-                Category : {{ item.Category.name }}
-              </p>
-            </div>
-            <div>
-              <p class="text-sm text-gray-500">By : {{ item.User.username }}</p>
-              <span class="text-sm text-gray-500"
-                >On: {{ item.createdAt | date : "d MMMM yyy" }}</span
-              >
-            </div>
+        <div class="flex flex-col justify-between py-6 lg:mx-6">
+          <div>
+            <a
+              routerLink="/detailArticle/{{ item.title }}"
+              class="text-xl font-semibold text-gray-800 hover:underline"
+            >
+              {{ item.title }}
+            </a>
+            <p class="text-sm text-[#3A98B9]">
+              Category : {{ item.Category.name }}
+            </p>
           </div>
+          <div>
+            <p class="text-sm text-gray-500">By : {{ item.User.username }}</p>
+            <span class="text-sm text-gray-500"
+              >On: {{ item.createdAt | date : "d MMMM yyy" }}</span
+            >
+          </div>
+        </div>
         <!-- </a> -->
       </div>
 
       <div
-      *ngIf="!articles.length"
+        *ngIf="!articles.length"
         class="flex items-center justify-center p-6 rounded-lg w-[78vw] h-[75vh]"
       >
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-700">
@@ -400,6 +409,12 @@
           </div>
         </div>
       </div> -->
+    </div>
+    <div
+      *ngIf="articles.length >= 10"
+      class="my-10 text-center"
+    >
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
   </div>
 </section>

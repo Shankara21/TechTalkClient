@@ -14,8 +14,15 @@ export class DashboardComponent implements OnInit {
 
   constructor(public ControlService: ControlService, private router: Router, private cookieService: CookieService) { }
 
+  // pagination
+  p: number = 1;
+  itemsPerPage: number = 10;
+  totalProduct: any;
+  // search
+  term: any;
+
   articles: any[] = [];
-  categories:any[] = [];
+  categories: any[] = [];
 
   // auth
   decoded: any;

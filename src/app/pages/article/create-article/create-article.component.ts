@@ -114,10 +114,10 @@ export class CreateArticleComponent implements OnInit {
       return;
     }
 
-    this.isDisabled = true;
-    setTimeout(() => {
-      this.isDisabled = false;
-    }, 5000);
+    // this.isDisabled = true;
+    // setTimeout(() => {
+    //   this.isDisabled = false;
+    // }, 5000);
     this.form.value.categoryId = Number(this.form.value.categoryId);
     this.form.value.userId = Number(this.form.value.userId);
 
@@ -125,14 +125,20 @@ export class CreateArticleComponent implements OnInit {
 
 
     const formData = new FormData();
-    formData.append('title', this.form.value.title);
-    formData.append('userId', this.form.value.userId);
-    formData.append('categoryId', this.form.value.categoryId);
-    formData.append('desc', this.form.value.desc);
-    formData.append('cover', this.cover, this.cover.name);
-
-    formData.append('infografis', this.infografis, this.infografis.name);
-
+    if (this.infografis) {
+      formData.append('title', this.form.value.title);
+      formData.append('userId', this.form.value.userId);
+      formData.append('categoryId', this.form.value.categoryId);
+      formData.append('desc', this.form.value.desc);
+      formData.append('cover', this.cover, this.cover.name);
+      formData.append('infografis', this.infografis, this.infografis.name);
+    } else {
+      formData.append('title', this.form.value.title);
+      formData.append('userId', this.form.value.userId);
+      formData.append('categoryId', this.form.value.categoryId);
+      formData.append('desc', this.form.value.desc);
+      formData.append('cover', this.cover, this.cover.name);
+    }
 
     this.controlService.createArticle(formData).subscribe((data: any) => {
       this.router.navigate(['/articles']);
