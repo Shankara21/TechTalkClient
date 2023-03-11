@@ -1,5 +1,6 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DetailArticleComponent } from './pages/detail-article/detail-article.component';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 @NgModule({
@@ -44,7 +46,10 @@ import { DetailArticleComponent } from './pages/detail-article/detail-article.co
     ReactiveFormsModule,
     NgxPaginationModule,
     Ng2SearchPipeModule,
+    BrowserAnimationsModule,
+    NgxSpinnerModule,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -1,4 +1,12 @@
 <section class="">
+  <ngx-spinner
+    bdColor="rgba(51,51,51,0.8)"
+    size="medium"
+    color="#fff"
+    type="ball-scale-multiple"
+  >
+    <p style="font-size: 20px; color: white">Loading...</p>
+  </ngx-spinner>
   <div class="container px-2 py-4 mx-auto">
     <h1 class="mb-2 text-4xl font-extrabold text-gray-900">
       <span
@@ -79,14 +87,14 @@
         <!-- </a> -->
       </div>
 
-      <div
+      <!-- <div
         *ngIf="!articles.length"
         class="flex items-center justify-center p-6 rounded-lg w-[78vw] h-[75vh]"
       >
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-700">
           Belum ada article.
         </h5>
-      </div>
+      </div> -->
 
       <!-- End of Call -->
       <!-- <div class="lg:flex">
@@ -410,10 +418,7 @@
         </div>
       </div> -->
     </div>
-    <div
-      *ngIf="articles.length >= 10"
-      class="my-10 text-center"
-    >
+    <div *ngIf="articles.length >= 10" class="my-10 text-center">
       <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
   </div>

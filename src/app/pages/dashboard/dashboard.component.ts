@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import jwt_decode from 'jwt-decode';
 import { CookieService } from "ngx-cookie-service";
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-
+import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -12,7 +12,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(public ControlService: ControlService, private router: Router, private cookieService: CookieService) { }
+  constructor(public ControlService: ControlService, private router: Router, private cookieService: CookieService, private spinner: NgxSpinnerService) { }
 
   // pagination
   p: number = 1;
@@ -51,12 +51,23 @@ export class DashboardComponent implements OnInit {
       }
     });
 
+    // this.spinner.show();
+
+    // setTimeout(() => {
+    //   /** spinner ends after 5 seconds */
+    //   this.spinner.hide();
+    // }, 5000);
+
 
     this.ControlService.getCategories().subscribe((data: any) => {
+      this.spinner.show();
       this.categories = data;
+      this.spinner.hide();
     })
     this.ControlService.getArticles().subscribe((data: any) => {
+      this.spinner.show();
       this.articles = data;
+      this.spinner.hide();
     })
 
     this.category = new FormGroup({

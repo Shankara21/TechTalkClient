@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import jwt_decode from 'jwt-decode';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-index-article',
@@ -12,7 +13,7 @@ import jwt_decode from 'jwt-decode';
 })
 export class IndexArticleComponent implements OnInit {
 
-  constructor(public ControlService: ControlService, private router: Router, private cookieService: CookieService) { }
+  constructor(public ControlService: ControlService, private router: Router, private cookieService: CookieService, private spinner: NgxSpinnerService) { }
 
   // pagination
   p: number = 1;
@@ -50,10 +51,12 @@ export class IndexArticleComponent implements OnInit {
     });
 
     this.ControlService.getArticles().subscribe((data: any) => {
+      this.spinner.show()
       this.articles = data;
       this.articles.map((item: any) => {
         item.index = this.articles.indexOf(item) + 1;
       })
+      this.spinner.hide()
     })
   }
 
