@@ -58,17 +58,28 @@ export class DashboardComponent implements OnInit {
     //   this.spinner.hide();
     // }, 5000);
 
-
+    this.spinner.show();
     this.ControlService.getCategories().subscribe((data: any) => {
-      this.spinner.show();
       this.categories = data;
-      this.spinner.hide();
     })
+    this.spinner.hide();
+    // this.spinner.show();
+    // setTimeout(() => {
+    // }, 5000);
+    // this.spinner.hide();
+    // setTimeout(() => {
+    // this.spinner.show();
+    // this.ControlService.getArticles().subscribe((data: any) => {
+    //   this.articles = data;
+    // })
+    // this.spinner.hide();
+    // }, 5000);
+    // this.getAllArticle();
+    this.spinner.show();
     this.ControlService.getArticles().subscribe((data: any) => {
-      this.spinner.show();
       this.articles = data;
-      this.spinner.hide();
     })
+    this.spinner.hide();
 
     this.category = new FormGroup({
       name: new FormControl('', [Validators.required]),
@@ -83,6 +94,16 @@ export class DashboardComponent implements OnInit {
     this.ControlService.getArticles().subscribe((data: any) => {
       this.articles = data;
     })
+  }
+
+  getAllArticle() {
+    this.spinner.show();
+    setTimeout(() => {
+      this.ControlService.getArticles().subscribe((data: any) => {
+        this.articles = data;
+      })
+      this.spinner.hide();
+    }, 1000);
   }
 
 }

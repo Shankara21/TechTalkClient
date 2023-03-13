@@ -53,16 +53,16 @@
         "
       >
         <a routerLink="/detailArticle/{{ item.title }}">
-          <!-- <img
+          <img
             class="object-cover w-full h-56 rounded-lg lg:w-64"
             src="http://192.168.9.47:3125/{{ item.cover }}"
             alt=""
-          /> -->
-          <img
+          />
+          <!-- <img
             class="object-cover w-full h-56 rounded-lg lg:w-64"
             src="http://localhost:3000/{{ item.cover }}"
             alt=""
-          />
+          /> -->
         </a>
         <!-- <a routerLink="/detailArticle/{{ item.title }}"> -->
         <div class="flex flex-col justify-between py-6 lg:mx-6">
@@ -87,14 +87,14 @@
         <!-- </a> -->
       </div>
 
-      <!-- <div
+      <div
         *ngIf="!articles.length"
         class="flex items-center justify-center p-6 rounded-lg w-[78vw] h-[75vh]"
       >
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-700">
           Belum ada article.
         </h5>
-      </div> -->
+      </div>
 
       <!-- End of Call -->
       <!-- <div class="lg:flex">

@@ -10,15 +10,16 @@
       Category : {{ article.Category.name }}
     </p>
     <div class="flex justify-center">
-      <img
+      <!-- <img
         class="h-auto max-w-md mb-5 rounded-xl"
         src="http://localhost:3000/{{ article.infografis }}"
         *ngIf="article.infografis"
-      />
-      <!-- <img
+      /> -->
+      <img
         class="h-auto max-w-md mb-5 rounded-xl"
         src="http://192.168.9.47:3125/{{ article.infografis }}"
-      /> -->
+        *ngIf="article.infografis"
+      />
     </div>
 
     <p class="mb-3 font-light text-justify text-gray-500">
